@@ -1,0 +1,225 @@
+<!doctype html>
+<html>
+
+<body>
+    <div class="divvy"></div>
+    <script>
+        window.onload = function donenow() {
+            document.querySelector(".divvy").textContent = "Hello World";
+            document.querySelector(".divvy").style.backgroundColor = 'purple';
+            document.querySelector(".divvy").style.height = "100px";
+            document.querySelector(".divvy").style.width = "100px";
+            document.querySelector(".divvy").addEventListener("mousedown",
+                function (e) { changeColor(e, "green"); });
+            document.querySelector(".divvy").addEventListener("mouseover ",
+                function (e) { changeColor(e, "red"); });
+            document.querySelector(".divvy").addEventListener("mouseup",
+                function (e) { changeColor(e, "blue"); });
+            document.querySelector(".divvy").addEventListener("mouseout",
+                function (e) { changeColor(e, "yellow"); });
+        }
+        console.log("hi2");
+        function changeColor(e, color) {
+            e.target.style.backgroundColor = color;
+            console.log(color, e.type);
+            console.dir(e);
+        }
+    </script>
+</body>
+
+</html>
+<!doctype html>
+<html>
+
+<body>
+    <button type="button" onclick="triggerSomething()">Click</button>
+    <script>
+        function triggerSomething() {
+            console.dir(event.target);
+        }
+    </script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div id="welcome">Hi there!</div>
+    <form>
+        <input type="text" name="firstname" placeholder="First name" />
+        <input type="text" name="lastname" placeholder="Last name" />
+        <input type="button" onclick="sendInfo()" value="Submit" />
+    </form>
+    <script>
+        function sendInfo() {
+            let p = event.target.parentElement;
+            message("Welcome " + p.firstname.value + " " + p.lastname.
+                value);
+        }
+        function message(m) {
+            document.getElementById("welcome").innerHTML = m;
+        }
+    </script>
+</body>
+
+</html>
+<!doctype html>
+<html>
+
+<head>
+    <title>JS Tester</title>
+</head>
+
+<body>
+    <div class="output"></div>
+    <input type="text" name="message" placeholder="Your Message">
+    <button class="btn1">Button 1</button>
+    <button class="btn2">Button 2</button>
+    <div>
+        <button class="btn3">Log</button>
+    </div>
+    <script>
+        let output = document.querySelector(".output");
+        let input = document.querySelector("input");
+        let btn1 = document.querySelector(".btn1");
+        let btn2 = document.querySelector(".btn2");
+        let btn3 = document.querySelector(".btn3");
+        let logs = [];
+        btn1.addEventListener("click", logEvent);
+        btn2.addEventListener("click", logEvent);
+        btn3.addEventListener("click", printLogs);
+
+        function logEvent(e) {
+            let log = {};
+            output.textContent = input.value;
+            log.input = input.value;
+            log.eventType = e.type;
+            log.tagName = e.target.tagName;
+            log.className = e.target.className;
+            logs.push(log);
+        }
+
+        function printLogs() {
+            input.value = "";
+            output.textContent = "";
+            logs.forEach(e => {
+                console.log(e.tagName, e.className, e.input, e.eventType);
+            })
+        }
+    </script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html>
+
+<body>
+    <style>
+        div {
+            border: 1px solid black;
+            margin-left: 5px;
+        }
+    </style>
+    <div id="message">Bubbling events</div>
+    <div id="output">
+        1
+        <div>
+            2
+            <div>
+                3
+                <div>
+                    4
+                    <div>5</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function bubble() {
+            console.log(this.innerText);
+        }
+        let divs = document.getElementsByTagName("div");
+        for (let i = 0; i < divs.length; i++) {
+            divs[i].addEventListener("click", bubble, true);
+        }
+    </script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div id="welcome">Hi there!</div>
+    <form>
+        <input type="text" name="firstname" placeholder="First name" onchange="logEvent()" />
+        <input type="text" name="lastname" placeholder="Last name" onblur="logEvent()" />
+        <input type="button" onclick="sendInfo()" value="Submit" />
+    </form>
+    <script>
+        function logEvent() {
+            let p = event.target;
+            if (p.name == "firstname") {
+                message("First Name Changed to " + p.value);
+            } else {
+                message("Last Name Changed to " + p.value);
+            }
+        }
+        function sendInfo() {
+            let p = event.target.parentElement;
+            message("Welcome " + p.firstname.value + " " + p.lastname.
+                value);
+        }
+        function message(m) {
+            document.getElementById("welcome").innerHTML = m;
+        }
+    </script>
+</body>
+
+</html>
+
+<!doctype html>
+<html>
+
+<head>
+    <title>JS Tester</title>
+</head>
+
+<body>
+    <div class="output1">
+    </div>
+    <input type="text" placeholder="First Name" name="first"><br>
+    <input type="text" placeholder="Last Name" name="last"><br>
+    <script>
+        const output = document.querySelector(".output1");
+        const in1 = document.querySelector("input[name='first']");
+        const in2 = document.querySelector("input[name='last']");
+        in1.addEventListener("change", (e) => {
+            console.log("change");
+            updater(in1.value);
+        });
+        in1.addEventListener("blur", (e) => {
+            console.log("blur");
+        });
+        in1.addEventListener("focus", (e) => {
+            console.log("focus");
+        });
+        in2.addEventListener("change", (e) => {
+            console.log("change");
+            updater(in2.value);
+        });
+        in2.addEventListener("blur", (e) => {
+            console.log("blur");
+        });
+        in2.addEventListener("focus", (e) => {
+            console.log("focus");
+        });
+        function updater(str) {
+            output.textContent = str;
+        }
+    </script>
+</body>
+
+</html>
+
